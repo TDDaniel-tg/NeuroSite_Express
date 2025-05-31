@@ -139,31 +139,40 @@ const generateCalendar = () => {
         dayElement.style.padding = '0.5rem';
         dayElement.style.textAlign = 'center';
         dayElement.style.borderRadius = '4px';
+        dayElement.style.position = 'relative';
+        dayElement.style.minHeight = '35px';
+        dayElement.style.display = 'flex';
+        dayElement.style.alignItems = 'center';
+        dayElement.style.justifyContent = 'center';
+        dayElement.style.fontWeight = '500';
         
         if (i < currentDay) {
             // Прошедшие дни - зачеркнуты
-            dayElement.style.textDecoration = 'line-through';
-            dayElement.style.color = '#e0e0e0';
-            dayElement.style.position = 'relative';
+            dayElement.style.color = '#6B7280'; // Серый цвет для зачеркнутых дней
+            dayElement.style.background = 'rgba(255, 255, 255, 0.05)';
             
             // Добавляем красный крестик
             const cross = document.createElement('span');
             cross.textContent = '✕';
             cross.style.position = 'absolute';
-            cross.style.color = '#f44336';
-            cross.style.fontSize = '1.5rem';
+            cross.style.color = '#ef4444'; // Красный цвет для крестика
+            cross.style.fontSize = '1.25rem';
             cross.style.top = '50%';
             cross.style.left = '50%';
             cross.style.transform = 'translate(-50%, -50%)';
+            cross.style.opacity = '0.8';
             dayElement.appendChild(cross);
         } else if (i === currentDay) {
             // Текущий день
             dayElement.style.background = '#FF6B35';
-            dayElement.style.color = 'white';
+            dayElement.style.color = '#ffffff'; // Белый цвет для текущего дня
             dayElement.style.fontWeight = 'bold';
+            dayElement.style.boxShadow = '0 2px 8px rgba(255, 107, 53, 0.3)';
         } else {
             // Будущие дни
-            dayElement.style.background = '#f5f5f5';
+            dayElement.style.background = 'rgba(255, 255, 255, 0.1)';
+            dayElement.style.color = '#E8EAED'; // Светлый цвет для будущих дней
+            dayElement.style.border = '1px solid rgba(255, 255, 255, 0.1)';
         }
         
         calendarGrid.appendChild(dayElement);

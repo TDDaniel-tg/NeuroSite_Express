@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>NeuroSite Express - Создание сайтов за 4 часа | Профессиональные сайты без ожидания</title>
+    <meta name="description" content="Создаем профессиональные сайты за 4 часа вместо 3 недель. Фиксированная цена от 21 000 ₽. Вы участвуете в процессе и получаете готовый результат в тот же день.">
+    <meta name="keywords" content="создание сайтов, быстрая разработка сайтов, сайт за 4 часа, экспресс сайт, лендинг за день">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="NeuroSite Express - Сайты за 4 часа">
+    <meta property="og:description" content="Создаем профессиональные сайты за 4 часа. Фиксированная цена, прозрачный процесс.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://neurosite-express.ru">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="logo">NeuroSite Express</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#hero" class="nav-link">Главная</a>
+                <a href="#approach" class="nav-link">Как работаем</a>
+                <a href="#portfolio" class="nav-link">Примеры</a>
+                <a href="#pricing" class="nav-link">Тарифы</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="#contact" class="nav-link nav-cta">Заказать сайт</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section 1: Hero - Главный экран с проблемой -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title animate-fade-in">
+                    Пока вы ждете сайт от студии 3 недели, конкуренты уже тестируют третий оффер
+                </h1>
+                <p class="hero-subtitle animate-fade-in-delay">
+                    Создаем профессиональные сайты за 4 часа. Фиксируем срок в договоре.
+                </p>
+                <p class="hero-text animate-fade-in-delay-2">
+                    Знакомо? Веб-студия обещала сайт через 2 недели. Прошел месяц — всё еще "дорабатывают дизайн". А вы теряете клиентов каждый день.
+                </p>
+                <button class="btn btn-primary btn-large animate-fade-in-delay-3" onclick="showVideo()">
+                    <i class="fas fa-play-circle"></i> Посмотреть, как мы создаем сайт за 4 часа
+                </button>
+            </div>
+            <div class="hero-visual">
+                <!-- Визуализация: календарь с зачеркнутыми днями и упущенные заявки -->
+                <div class="split-visual">
+                    <div class="calendar-side">
+                        <div class="calendar-header">Ваше ожидание</div>
+                        <div class="calendar-grid">
+                            <!-- Генерируется через JS -->
+                        </div>
+                    </div>
+                    <div class="losses-side">
+                        <div class="losses-header">Упущенные клиенты</div>
+                        <div class="losses-counter">
+                            <span id="lossesCount">0</span>
+                            <span class="losses-label">потенциальных заявок</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Pain Points - Усиление боли -->
+    <section class="pain-points" id="pain">
+        <div class="container">
+            <h2 class="section-title">
+                Традиционная разработка сайта — это п***ец как дорого и долго
+            </h2>
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <i class="fas fa-clock problem-icon"></i>
+                    <h3>3-4 недели ожидания</h3>
+                    <p>Пока конкуренты запускают рекламу</p>
+                </div>
+                <div class="problem-card">
+                    <i class="fas fa-ruble-sign problem-icon"></i>
+                    <h3>От 80 000 ₽ за простой сайт</h3>
+                    <p>И это без гарантий результата</p>
+                </div>
+                <div class="problem-card">
+                    <i class="fas fa-infinity problem-icon"></i>
+                    <h3>Бесконечные правки</h3>
+                    <p>"Давайте передвинем кнопку на 2 пикселя влево"</p>
+                </div>
+                <div class="problem-card">
+                    <i class="fas fa-question problem-icon"></i>
+                    <h3>Непрозрачный процесс</h3>
+                    <p>Что они там делают 3 недели?</p>
+                </div>
+                <div class="problem-card">
+                    <i class="fas fa-money-bill-wave problem-icon"></i>
+                    <h3>Переплата за "креатив"</h3>
+                    <p>Который на деле шаблон с ThemeForest</p>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "Заказывали сайт в студии N. Обещали за 2 недели и 120 тысяч. В итоге: 6 недель, 180 тысяч и сайт, который тормозит на телефоне"
+                </p>
+                <div class="testimonial-author">
+                    <img src="https://via.placeholder.com/60x60" alt="Сергей" class="author-avatar">
+                    <div>
+                        <p class="author-name">Сергей</p>
+                        <p class="author-role">Владелец магазина стройматериалов</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Solution - Наш подход -->
+    <section class="solution" id="approach">
+        <div class="container">
+            <h2 class="section-title">Мы создаем сайты за 4 часа. И это не шутка</h2>
+            <p class="section-subtitle">
+                Используем современный подход: вместо недель "рисования макетов" сразу создаем рабочий сайт. 
+                Вы участвуете в процессе и видите результат в реальном времени.
+            </p>
+            
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Созваниваемся в назначенное время</h3>
+                    <p>Никаких переносов</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Работаем вместе 4 часа подряд</h3>
+                    <p>Вы видите каждый шаг</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Вносим правки прямо в процессе</h3>
+                    <p>Не нужно ждать следующей итерации</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>К концу 4-го часа сайт готов</h3>
+                    <p>Сразу можете запускать рекламу</p>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <button class="btn btn-primary btn-large" onclick="showVideo()">
+                    <i class="fas fa-video"></i> Посмотреть весь процесс на видео
+                </button>
+            </div>
+            
+            <!-- Time-lapse видео placeholder -->
+            <div class="video-container" id="videoContainer">
+                <div class="video-placeholder">
+                    <i class="fas fa-play-circle"></i>
+                    <p>Time-lapse видео создания сайта (ускоренное до 2 минут)</p>
+                    <div class="timer">00:00 / 04:00</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Portfolio - Результаты и примеры -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Вот что получается за 4 часа</h2>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x300" alt="NeuroImpuls сайт">
+                        <div class="portfolio-overlay">
+                            <a href="https://neuroimpuls.ru" target="_blank" class="btn btn-white">
+                                Посмотреть сайт
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>neuroimpuls.ru</h3>
+                        <p class="portfolio-type">Сайт AI-компании</p>
+                        <ul class="portfolio-features">
+                            <li><i class="fas fa-check"></i> Создан за 4 часа</li>
+                            <li><i class="fas fa-check"></i> 15 уникальных блоков</li>
+                            <li><i class="fas fa-check"></i> Работает на всех устройствах</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x300" alt="TechStore24 сайт">
+                        <div class="portfolio-overlay">
+                            <a href="#" class="btn btn-white">Посмотреть сайт</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>techstore24.ru</h3>
+                        <p class="portfolio-type">Интернет-магазин</p>
+                        <ul class="portfolio-features">
+                            <li><i class="fas fa-check"></i> Создан за 8 часов</li>
+                            <li><i class="fas fa-check"></i> Каталог на 50 товаров</li>
+                            <li><i class="fas fa-check"></i> Интеграция с CRM</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x300" alt="ConsultPro сайт">
+                        <div class="portfolio-overlay">
+                            <a href="#" class="btn btn-white">Посмотреть сайт</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>consultpro.ru</h3>
+                        <p class="portfolio-type">Корпоративный сайт</p>
+                        <ul class="portfolio-features">
+                            <li><i class="fas fa-check"></i> Создан за 6 часов</li>
+                            <li><i class="fas fa-check"></i> Система заявок</li>
+                            <li><i class="fas fa-check"></i> Личный кабинет</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value">1.2 сек</div>
+                    <div class="metric-label">Скорость загрузки</div>
+                    <div class="metric-desc">Быстрее 90% сайтов</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">100/100</div>
+                    <div class="metric-label">Mobile-friendly</div>
+                    <div class="metric-desc">По Google PageSpeed</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">от 3%</div>
+                    <div class="metric-label">Конверсия в заявку</div>
+                    <div class="metric-desc">Зависит от трафика</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Pricing - Тарифы -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Выберите, какой сайт нужен вашему бизнесу</h2>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>ЭКСПРЕСС</h3>
+                        <div class="pricing-price">21 000 ₽</div>
+                        <p class="pricing-desc">Для быстрого старта</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 4 часа работы</li>
+                        <li><i class="fas fa-check"></i> До 5 страниц</li>
+                        <li><i class="fas fa-check"></i> Формы заявок</li>
+                        <li><i class="fas fa-check"></i> Адаптация под телефоны</li>
+                        <li><i class="fas fa-check"></i> Готовый сайт в тот же день</li>
+                    </ul>
+                    <p class="pricing-for">Подойдет для: лендингов, сайтов-визиток, страниц для рекламы</p>
+                    <button class="btn btn-outline btn-block" onclick="openBookingModal('express')">
+                        Забронировать дату
+                    </button>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Популярный</div>
+                    <div class="pricing-header">
+                        <h3>БИЗНЕС</h3>
+                        <div class="pricing-price">42 000 ₽</div>
+                        <p class="pricing-desc">Для серьезных задач</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 8 часов работы</li>
+                        <li><i class="fas fa-check"></i> До 15 страниц</li>
+                        <li><i class="fas fa-check"></i> Каталог товаров/услуг</li>
+                        <li><i class="fas fa-check"></i> Интеграция с CRM</li>
+                        <li><i class="fas fa-check"></i> Система заказов</li>
+                    </ul>
+                    <p class="pricing-for">Подойдет для: интернет-магазинов, сервисных компаний, B2B</p>
+                    <button class="btn btn-primary btn-block" onclick="openBookingModal('business')">
+                        Забронировать дату
+                    </button>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>ПРЕМИУМ</h3>
+                        <div class="pricing-price">65 000 ₽</div>
+                        <p class="pricing-desc">Когда нужно выделиться</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 12 часов работы</li>
+                        <li><i class="fas fa-check"></i> До 25 страниц</li>
+                        <li><i class="fas fa-check"></i> Уникальный дизайн</li>
+                        <li><i class="fas fa-check"></i> Сложные интеграции</li>
+                        <li><i class="fas fa-check"></i> Персональный дизайнер</li>
+                    </ul>
+                    <p class="pricing-for">Подойдет для: брендов с амбициями, сложных проектов</p>
+                    <button class="btn btn-outline btn-block" onclick="openBookingModal('premium')">
+                        Забронировать дату
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Process - Процесс работы -->
+    <section class="process" id="process">
+        <div class="container">
+            <h2 class="section-title">Никакой магии. Просто правильный процесс</h2>
+            <p class="section-subtitle">Этапы работы для тарифа ЭКСПРЕСС</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>ЧАС 1: Разбираемся с вашим бизнесом</h3>
+                        <ul>
+                            <li>Изучаем вашу нишу и конкурентов</li>
+                            <li>Определяем, что должен делать сайт</li>
+                            <li>Формулируем ключевые сообщения</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>ЧАС 2: Создаем дизайн</h3>
+                        <ul>
+                            <li>Разрабатываем структуру</li>
+                            <li>Создаем визуальную концепцию</li>
+                            <li>Показываем первый вариант</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>ЧАС 3: Дорабатываем вместе</h3>
+                        <ul>
+                            <li>Вносим ваши правки в реальном времени</li>
+                            <li>Адаптируем под мобильные</li>
+                            <li>Финализируем дизайн</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>ЧАС 4: Запускаем сайт</h3>
+                        <ul>
+                            <li>Наполняем контентом</li>
+                            <li>Настраиваем формы</li>
+                            <li>Привязываем домен</li>
+                            <li>Тестируем и запускаем</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="process-features">
+                <div class="feature">
+                    <i class="fas fa-eye"></i>
+                    <p>Вы участвуете в каждом этапе</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-bolt"></i>
+                    <p>Видите результат сразу</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-hand-pointer"></i>
+                    <p>Можете влиять на процесс</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Comparison - Сравнение со студиями -->
+    <section class="comparison" id="comparison">
+        <div class="container">
+            <h2 class="section-title">Сравните сами</h2>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Традиционная студия</th>
+                            <th>NeuroSite Express</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Срок</td>
+                            <td class="negative">3-6 недель</td>
+                            <td class="positive">4-12 часов</td>
+                        </tr>
+                        <tr>
+                            <td>Стоимость</td>
+                            <td class="negative">от 80 000 ₽</td>
+                            <td class="positive">от 21 000 ₽</td>
+                        </tr>
+                        <tr>
+                            <td>Прозрачность</td>
+                            <td class="negative">"Мы вам покажем, когда будет готово"</td>
+                            <td class="positive">Вы видите каждый шаг</td>
+                        </tr>
+                        <tr>
+                            <td>Правки</td>
+                            <td class="negative">Каждая правка +3-5 дней</td>
+                            <td class="positive">Вносим в процессе работы</td>
+                        </tr>
+                        <tr>
+                            <td>Результат</td>
+                            <td class="negative">Может не понравиться</td>
+                            <td class="positive">Согласовываем по ходу</td>
+                        </tr>
+                        <tr>
+                            <td>Гарантия сроков</td>
+                            <td class="negative">"Ориентировочно"</td>
+                            <td class="positive">Фиксируем в договоре</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p class="comparison-note">
+                Мы не волшебники. Просто убрали всю лишнюю бюрократию и работаем напрямую с вами.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 8: FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title">Да, мы знаем, о чем вы думаете</h2>
+            
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>"За 4 часа можно сделать только г***но"</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Посмотрите наши работы. Сайт neuroimpuls.ru сделан за 4 часа. Оцените качество сами.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>"А если мне не понравится?"</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Вы участвуете в процессе и влияете на результат. Не может не понравиться то, что вы сами одобрили на каждом этапе.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>"Смогу ли я потом сам что-то менять?"</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Да. Мы передаем все доступы и краткую видеоинструкцию. Для сложных изменений — поможем за отдельную плату.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>"Это какой-то конструктор?"</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Нет. Мы создаем уникальный дизайн и чистый код специально под ваш бизнес.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>"Почему так дешево?"</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Мы оптимизировали процесс. Нет менеджеров, долгих согласований и офисных расходов. Только работа.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 9: Final CTA -->
+    <section class="final-cta" id="final-cta">
+        <div class="container">
+            <h2 class="section-title">Хватит кормить веб-студии. Получите сайт уже сегодня</h2>
+            <p class="section-subtitle">
+                Каждый день без нормального сайта — это упущенные клиенты. 
+                Забронируйте время, и через 4 часа у вас будет работающий инструмент для привлечения клиентов.
+            </p>
+            
+            <div class="cta-steps">
+                <div class="cta-step">
+                    <div class="step-number">1</div>
+                    <p>Выбираете удобную дату</p>
+                </div>
+                <div class="cta-step">
+                    <div class="step-number">2</div>
+                    <p>Вносите предоплату 70%</p>
+                </div>
+                <div class="cta-step">
+                    <div class="step-number">3</div>
+                    <p>Готовимся к продуктивным 4 часам</p>
+                </div>
+                <div class="cta-step">
+                    <div class="step-number">4</div>
+                    <p>Получаете готовый сайт</p>
+                </div>
+            </div>
+            
+            <div class="cta-action">
+                <button class="btn btn-primary btn-huge pulse" onclick="openBookingModal()">
+                    ЗАБРОНИРОВАТЬ ВРЕМЯ
+                </button>
+                <p class="availability">Осталось <span class="slots-count">5</span> слотов на эту неделю</p>
+            </div>
+            
+            <div class="bonus-offer">
+                <i class="fas fa-gift"></i>
+                <p>Первым 3 клиентам — бесплатный аудит юзабилити через месяц после запуска</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 10: Guarantees & Contacts -->
+    <section class="guarantees" id="contact">
+        <div class="container">
+            <div class="guarantees-list">
+                <div class="guarantee">
+                    <i class="fas fa-file-contract"></i>
+                    <div>
+                        <h4>Срок фиксируем в договоре</h4>
+                        <p>Опоздаем хоть на час, вернем 50%</p>
+                    </div>
+                </div>
+                <div class="guarantee">
+                    <i class="fas fa-eye"></i>
+                    <div>
+                        <h4>Прозрачный процесс</h4>
+                        <p>Вы видите каждый шаг</p>
+                    </div>
+                </div>
+                <div class="guarantee">
+                    <i class="fas fa-tag"></i>
+                    <div>
+                        <h4>Четкая стоимость</h4>
+                        <p>Никаких доплат и скрытых расходов</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-block">
+                <div class="contact-person">
+                    <img src="https://via.placeholder.com/120x120" alt="Богдан Neuroimpulse" class="contact-avatar">
+                    <div class="contact-info">
+                        <h3>Богдан Neuroimpulse</h3>
+                        <p class="contact-role">Основатель NeuroSite Express</p>
+                        <div class="contact-links">
+                            <a href="https://t.me/bogdan_neuroimpulse" class="contact-link">
+                                <i class="fab fa-telegram"></i> @bogdan_neuroimpulse
+                            </a>
+                            <a href="https://wa.me/79991234567" class="contact-link">
+                                <i class="fab fa-whatsapp"></i> +7 (999) 123-45-67
+                            </a>
+                            <a href="mailto:info@neurosite-express.ru" class="contact-link">
+                                <i class="fas fa-envelope"></i> info@neurosite-express.ru
+                            </a>
+                        </div>
+                        <p class="contact-cta">"Просто напишите, и мы обсудим ваш проект за 15 минут"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">NeuroSite Express</span>
+                    <p>Создаем сайты быстрее всех</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#" onclick="openModal('privacy')">Политика конфиденциальности</a>
+                    <a href="#" onclick="openModal('terms')">Договор оферты</a>
+                    <a href="#" onclick="openModal('payment')">Способы оплаты</a>
+                </div>
+                <div class="footer-copy">
+                    <p>&copy; 2024 NeuroSite Express. Все права защищены.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Booking -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2>Забронировать время</h2>
+            <form id="bookingForm" class="booking-form">
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+7 (999) 123-45-67" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="tariff">Выбранный тариф</label>
+                    <select id="tariff" name="tariff" required>
+                        <option value="express">ЭКСПРЕСС - 21 000 ₽</option>
+                        <option value="business">БИЗНЕС - 42 000 ₽</option>
+                        <option value="premium">ПРЕМИУМ - 65 000 ₽</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Желаемая дата</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Кратко о проекте</label>
+                    <textarea id="message" name="message" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    Отправить заявку
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content modal-video">
+            <span class="modal-close" onclick="closeVideoModal()">&times;</span>
+            <div class="video-wrapper">
+                <!-- Здесь будет встроено видео -->
+                <div class="video-placeholder">
+                    <i class="fas fa-play-circle"></i>
+                    <h3>Time-lapse видео создания сайта</h3>
+                    <p>Показываем реальный процесс создания сайта за 4 часа, ускоренный до 2 минут</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html> 

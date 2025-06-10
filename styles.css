@@ -49,6 +49,14 @@
 }
 
 html {
+    overflow-x: hidden;
+}
+
+* {
+    max-width: 100%;
+}
+
+html {
     scroll-behavior: smooth;
 }
 
@@ -60,6 +68,9 @@ body {
     background-color: var(--bg-dark);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
 }
 
 /* Typography */
@@ -124,6 +135,8 @@ img {
     transition: all var(--transition-normal);
     text-align: center;
     white-space: nowrap;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .btn-primary {
@@ -269,6 +282,10 @@ img {
 
 .hero-content {
     margin-bottom: 3rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .hero-title {
@@ -303,6 +320,9 @@ img {
     box-shadow: var(--shadow-xl);
     padding: 2rem;
     border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .calendar-side, .losses-side {
@@ -319,8 +339,11 @@ img {
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 0.5rem;
+    gap: 0.25rem;
     margin-bottom: 1rem;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 /* Стили для дней календаря */
@@ -330,6 +353,12 @@ img {
     transition: all var(--transition-fast);
     cursor: default;
     font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .calendar-day:hover {
@@ -521,6 +550,14 @@ img {
 /* Video Container */
 .video-container {
     margin-top: 3rem;
+}
+
+.video-container video {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
 }
 
 .video-placeholder {
@@ -877,10 +914,46 @@ img {
 .comparison-table {
     overflow-x: auto;
     margin-bottom: 2rem;
+    position: relative;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+}
+
+.comparison-table::-webkit-scrollbar {
+    height: 6px;
+}
+
+.comparison-table::-webkit-scrollbar-track {
+    background: var(--bg-darker);
+    border-radius: 3px;
+}
+
+.comparison-table::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+.comparison-table::after {
+    content: "← Прокрутите для просмотра →";
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.875rem;
+    color: var(--text-light);
+    opacity: 0.7;
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .comparison-table::after {
+        display: block;
+    }
 }
 
 .comparison-table table {
     width: 100%;
+    min-width: 600px;
     border-collapse: collapse;
     background: var(--bg-card);
     box-shadow: var(--shadow-md);
@@ -1338,19 +1411,28 @@ img {
 
 .video-wrapper {
     position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.video-wrapper video {
+    width: 100%;
+    border-radius: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
 }
 
 .video-wrapper .video-placeholder {
-    position: absolute;
-    inset: 0;
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    border: 2px dashed var(--primary-color);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: var(--bg-dark);
 }
 
 /* ==========================================================================
@@ -1528,6 +1610,83 @@ img {
         background: var(--bg-darker) !important;
         border: 1px solid var(--border-color);
         border-top: none;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .comparison-table {
+        margin-bottom: 3rem;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+        padding: 1rem;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+    
+    .bonus-offer {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .cta-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .hero {
+        padding: calc(var(--header-height) + 2rem) 0 2rem;
+    }
+    
+    .split-visual {
+        padding: 1.5rem;
+        gap: 1.5rem;
+        margin: 0;
+    }
+    
+    .calendar-grid {
+        gap: 0.15rem;
+    }
+    
+    .calendar-day {
+        font-size: 0.75rem;
+        min-width: 0;
+    }
+    
+    .losses-counter {
+        font-size: 2.5rem;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+    }
+    
+    .hero-subtitle {
+        font-size: 1.125rem;
+    }
+    
+    .hero-text {
+        font-size: 1rem;
+    }
+    
+    .btn {
+        white-space: normal;
+        text-align: center;
+        line-height: 1.4;
+    }
+    
+    .btn-large {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .btn-huge {
+        padding: 1rem 2rem;
+        font-size: 1.125rem;
     }
 }
 

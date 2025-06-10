@@ -178,11 +178,15 @@
             
             <!-- Time-lapse видео placeholder -->
             <div class="video-container" id="videoContainer">
-                <div class="video-placeholder">
-                    <i class="fas fa-play-circle"></i>
-                    <p>Time-lapse видео создания сайта (ускоренное до 2 минут)</p>
-                    <div class="timer">00:00 / 04:00</div>
-                </div>
+                <video id="mainTimelapseVideo" controls width="100%" height="auto" poster="/image/video-poster.jpg">
+                    <source src="video/timelaps.mp4" type="video/mp4">
+                    <div class="video-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Time-lapse видео создания сайта (ускоренное до 2 минут)</p>
+                        <div class="timer">00:00 / 04:00</div>
+                    </div>
+                    Ваш браузер не поддерживает воспроизведение видео.
+                </video>
             </div>
         </div>
     </section>
@@ -195,7 +199,7 @@
             <div class="portfolio-grid">
                 <div class="portfolio-card">
                     <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/400x300" alt="NeuroImpuls сайт">
+                        <img src="/image/case1.jpg" alt="NeuroImpuls сайт">
                         <div class="portfolio-overlay">
                             <a href="https://neuroimpuls.ru" target="_blank" class="btn btn-white">
                                 Посмотреть сайт
@@ -215,7 +219,7 @@
                 
                 <div class="portfolio-card">
                     <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/400x300" alt="TechStore24 сайт">
+                        <img src="/image/case2.jpg" alt="TechStore24 сайт">
                         <div class="portfolio-overlay">
                             <a href="#" class="btn btn-white">Посмотреть сайт</a>
                         </div>
@@ -233,7 +237,7 @@
                 
                 <div class="portfolio-card">
                     <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/400x300" alt="ConsultPro сайт">
+                        <img src="/image/case3.jpg" alt="ConsultPro сайт">
                         <div class="portfolio-overlay">
                             <a href="#" class="btn btn-white">Посмотреть сайт</a>
                         </div>
@@ -604,7 +608,7 @@
             
             <div class="contact-block">
                 <div class="contact-person">
-                    <img src="https://via.placeholder.com/120x120" alt="Богдан Neuroimpulse" class="contact-avatar">
+                    <img src="/image/bogdan_main.jpg" alt="Богдан Neuroimpulse" class="contact-avatar">
                     <div class="contact-info">
                         <h3>Богдан Neuroimpulse</h3>
                         <p class="contact-role">Основатель NeuroSite Express</p>
@@ -692,12 +696,15 @@
         <div class="modal-content modal-video">
             <span class="modal-close" onclick="closeVideoModal()">&times;</span>
             <div class="video-wrapper">
-                <!-- Здесь будет встроено видео -->
-                <div class="video-placeholder">
-                    <i class="fas fa-play-circle"></i>
-                    <h3>Time-lapse видео создания сайта</h3>
-                    <p>Показываем реальный процесс создания сайта за 4 часа, ускоренный до 2 минут</p>
-                </div>
+                <video id="timelapseVideo" controls width="100%" height="auto" poster="/image/video-poster.jpg">
+                    <source src="video/timelaps.mp4" type="video/mp4">
+                    <div class="video-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>Time-lapse видео создания сайта</h3>
+                        <p>Показываем реальный процесс создания сайта за 4 часа, ускоренный до 2 минут</p>
+                    </div>
+                    Ваш браузер не поддерживает воспроизведение видео.
+                </video>
             </div>
         </div>
     </div>

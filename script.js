@@ -222,11 +222,29 @@ function closeModal() {
 function showVideo() {
     videoModal.classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    // Автоматически запускаем видео
+    const video = document.getElementById('timelapseVideo');
+    if (video) {
+        // Небольшая задержка для правильного отображения модального окна
+        setTimeout(() => {
+            video.play().catch(error => {
+                console.log('Автовоспроизведение заблокировано браузером:', error);
+            });
+        }, 300);
+    }
 }
 
 function closeVideoModal() {
     videoModal.classList.remove('active');
     document.body.style.overflow = 'auto';
+    
+    // Останавливаем и сбрасываем видео
+    const video = document.getElementById('timelapseVideo');
+    if (video) {
+        video.pause();
+        video.currentTime = 0;
+    }
 }
 
 // Закрытие модалок по клику вне контента
@@ -236,6 +254,15 @@ function closeVideoModal() {
             if (e.target === modal) {
                 modal.classList.remove('active');
                 document.body.style.overflow = 'auto';
+                
+                // Если это видео модальное окно, останавливаем видео
+                if (modal === videoModal) {
+                    const video = document.getElementById('timelapseVideo');
+                    if (video) {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
+                }
             }
         });
     }
@@ -408,7 +435,24 @@ if (slotsCount) {
 }
 
 // ==========================================================================
-// 14. Preloader (опционально)
+// 14. Автовоспроизведение основного видео
+// ==========================================================================
+const mainVideo = document.getElementById('mainTimelapseVideo');
+if (mainVideo) {
+    mainVideo.addEventListener('click', () => {
+        if (mainVideo.paused) {
+            mainVideo.play().catch(error => {
+                console.log('Автовоспроизведение заблокировано браузером:', error);
+            });
+        }
+    });
+    
+    // Добавляем стиль курсора для основного видео
+    mainVideo.style.cursor = 'pointer';
+}
+
+// ==========================================================================
+// 15. Preloader (опционально)
 // ==========================================================================
 window.addEventListener('load', () => {
     // Убираем прелоадер если есть

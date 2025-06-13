@@ -1,0 +1,25 @@
+{
+  "name": "neurosite-express",
+  "version": "1.0.0",
+  "description": "Сайт NeuroSite Express с Telegram интеграцией",
+  "main": "index.html",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'Build completed'",
+    "deploy": "netlify deploy --prod"
+  },
+  "dependencies": {
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  },
+  "keywords": [
+    "website",
+    "telegram",
+    "forms",
+    "netlify"
+  ],
+  "author": "NeuroSite Express",
+  "license": "MIT"
+} 

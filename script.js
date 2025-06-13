@@ -271,6 +271,122 @@ function closeVideoModal() {
 // ==========================================================================
 // 8. Обработка формы заказа
 // ==========================================================================
+
+// ВАЖНО: Замените эти значения на ваши реальные данные
+const TELEGRAM_CONFIG = {
+    botToken: 'YOUR_BOT_TOKEN_HERE', // Токен вашего бота
+    chatId: 'YOUR_CHAT_ID_HERE' // ID вашего канала/чата (например: -1001234567890)
+};
+
+// Функция отправки сообщения в Telegram
+async function sendToTelegram(formData) {
+    try {
+        // Сначала пробуем безопасный метод через Netlify Functions (если настроен)
+        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+            try {
+                const response = await fetch('/.netlify/functions/telegram', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    return result.success;
+                }
+            } catch (netlifyError) {
+                console.log('Netlify Functions недоступны, пробуем прямой метод');
+            }
+        }
+
+        // Fallback: прямая отправка через CORS proxy
+        const message = `
+🆕 НОВАЯ ЗАЯВКА NeuroSite Express
+
+👤 Имя: ${formData.name}
+📞 Телефон: ${formData.phone}
+📧 Email: ${formData.email}
+💰 Тариф: ${getTariffName(formData.tariff)}
+📅 Желаемая дата: ${formData.date || 'Не указана'}
+💬 Сообщение: ${formData.message || 'Не указано'}
+
+⏰ Дата заявки: ${new Date().toLocaleString('ru-RU')}
+        `;
+
+        // Используем публичный CORS proxy для отправки в Telegram
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+        const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
+        
+        const response = await fetch(proxyUrl + telegramUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CONFIG.chatId,
+                text: message,
+                parse_mode: 'HTML'
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        return result.ok;
+    } catch (error) {
+        console.error('Ошибка отправки в Telegram:', error);
+        
+        // Последний fallback: альтернативный proxy
+        try {
+            const message = `
+🆕 НОВАЯ ЗАЯВКА NeuroSite Express
+
+👤 Имя: ${formData.name}
+📞 Телефон: ${formData.phone}
+📧 Email: ${formData.email}
+💰 Тариф: ${getTariffName(formData.tariff)}
+📅 Желаемая дата: ${formData.date || 'Не указана'}
+💬 Сообщение: ${formData.message || 'Не указано'}
+
+⏰ Дата заявки: ${new Date().toLocaleString('ru-RU')}
+            `;
+
+            const fallbackUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`)}`;
+            
+            const fallbackResponse = await fetch(fallbackUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CONFIG.chatId,
+                    text: message
+                })
+            });
+            
+            return fallbackResponse.ok;
+        } catch (fallbackError) {
+            console.error('Все методы отправки не сработали:', fallbackError);
+            return false;
+        }
+    }
+}
+
+// Функция для получения названия тарифа
+function getTariffName(tariff) {
+    const tariffs = {
+        'express': 'ЭКСПРЕСС - 21 000 ₽',
+        'business': 'БИЗНЕС - 42 000 ₽',
+        'premium': 'ПРЕМИУМ - 65 000 ₽'
+    };
+    return tariffs[tariff] || tariff;
+}
+
 if (bookingForm) {
     bookingForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -291,21 +407,29 @@ if (bookingForm) {
         submitButton.textContent = 'Отправляем...';
         submitButton.disabled = true;
         
-        // Имитация отправки
-        setTimeout(() => {
-            // Показываем успешное сообщение
-            alert('Спасибо за заявку! Мы свяжемся с вами в течение 15 минут.');
+        try {
+            const success = await sendToTelegram(formData);
             
-            // Очищаем форму
-            bookingForm.reset();
-            
-            // Закрываем модалку
-            closeModal();
-            
-            // Возвращаем кнопку
+            if (success) {
+                // Показываем успешное сообщение
+                alert('Спасибо за заявку! Мы получили ваши данные и свяжемся с вами в течение 15 минут.');
+                
+                // Очищаем форму
+                bookingForm.reset();
+                
+                // Закрываем модалку
+                closeModal();
+            } else {
+                throw new Error('Не удалось отправить заявку');
+            }
+        } catch (error) {
+            console.error('Ошибка при отправке формы:', error);
+            alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте еще раз или свяжитесь с нами напрямую в Telegram: @bogdan_neuroimpulse');
+        } finally {
+            // Возвращаем кнопку в исходное состояние
             submitButton.textContent = originalText;
             submitButton.disabled = false;
-        }, 1500);
+        }
     });
 }
 

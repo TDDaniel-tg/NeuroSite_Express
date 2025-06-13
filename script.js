@@ -272,108 +272,36 @@ function closeVideoModal() {
 // 8. Обработка формы заказа
 // ==========================================================================
 
-// ВАЖНО: Замените эти значения на ваши реальные данные
+// Конфигурация удалена - используются Netlify Functions для безопасности
 const TELEGRAM_CONFIG = {
-    botToken: 'YOUR_BOT_TOKEN_HERE', // Токен вашего бота
-    chatId: 'YOUR_CHAT_ID_HERE' // ID вашего канала/чата (например: -1001234567890)
+    botToken: null,
+    chatId: null
 };
 
 // Функция отправки сообщения в Telegram
 async function sendToTelegram(formData) {
     try {
-        // Сначала пробуем безопасный метод через Netlify Functions (если настроен)
-        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-            try {
-                const response = await fetch('/.netlify/functions/telegram', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    return result.success;
-                }
-            } catch (netlifyError) {
-                console.log('Netlify Functions недоступны, пробуем прямой метод');
-            }
-        }
-
-        // Fallback: прямая отправка через CORS proxy
-        const message = `
-🆕 НОВАЯ ЗАЯВКА NeuroSite Express
-
-👤 Имя: ${formData.name}
-📞 Телефон: ${formData.phone}
-📧 Email: ${formData.email}
-💰 Тариф: ${getTariffName(formData.tariff)}
-📅 Желаемая дата: ${formData.date || 'Не указана'}
-💬 Сообщение: ${formData.message || 'Не указано'}
-
-⏰ Дата заявки: ${new Date().toLocaleString('ru-RU')}
-        `;
-
-        // Используем публичный CORS proxy для отправки в Telegram
-        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-        const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
-        
-        const response = await fetch(proxyUrl + telegramUrl, {
+        // Используем только Netlify Functions для безопасности
+        const response = await fetch('/.netlify/functions/telegram', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest'
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                chat_id: TELEGRAM_CONFIG.chatId,
-                text: message,
-                parse_mode: 'HTML'
-            })
+            body: JSON.stringify(formData)
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            const errorData = await response.text();
+            console.error('Netlify Functions error:', errorData);
+            throw new Error(`HTTP ${response.status}: ${errorData}`);
         }
 
         const result = await response.json();
-        return result.ok;
+        return result.success;
+
     } catch (error) {
         console.error('Ошибка отправки в Telegram:', error);
-        
-        // Последний fallback: альтернативный proxy
-        try {
-            const message = `
-🆕 НОВАЯ ЗАЯВКА NeuroSite Express
-
-👤 Имя: ${formData.name}
-📞 Телефон: ${formData.phone}
-📧 Email: ${formData.email}
-💰 Тариф: ${getTariffName(formData.tariff)}
-📅 Желаемая дата: ${formData.date || 'Не указана'}
-💬 Сообщение: ${formData.message || 'Не указано'}
-
-⏰ Дата заявки: ${new Date().toLocaleString('ru-RU')}
-            `;
-
-            const fallbackUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`)}`;
-            
-            const fallbackResponse = await fetch(fallbackUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CONFIG.chatId,
-                    text: message
-                })
-            });
-            
-            return fallbackResponse.ok;
-        } catch (fallbackError) {
-            console.error('Все методы отправки не сработали:', fallbackError);
-            return false;
-        }
+        return false;
     }
 }
 

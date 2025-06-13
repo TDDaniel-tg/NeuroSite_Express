@@ -272,35 +272,123 @@ function closeVideoModal() {
 // 8. Обработка формы заказа
 // ==========================================================================
 
-// Конфигурация удалена - используются Netlify Functions для безопасности
+// Настройки Telegram для отправки заявок
 const TELEGRAM_CONFIG = {
-    botToken: null,
-    chatId: null
+    botToken: '7672901413:AAHd0SfBJC3HmwwYxhU_Dwtjzch-cl8GwgE',
+    chatId: '-1002568274832'
 };
 
-// Функция отправки сообщения в Telegram
+// Функция отправки сообщения в Telegram (простая версия)
 async function sendToTelegram(formData) {
     try {
-        // Используем только Netlify Functions для безопасности
-        const response = await fetch('/.netlify/functions/telegram', {
+        // Проверяем что токены настроены
+        if (!TELEGRAM_CONFIG.botToken || !TELEGRAM_CONFIG.chatId || 
+            TELEGRAM_CONFIG.botToken.includes('ВАШ_') || TELEGRAM_CONFIG.chatId.includes('ВАШ_')) {
+            alert('Ошибка: Не настроены токены Telegram! Обратитесь к администратору.');
+            return false;
+        }
+
+        // Формируем сообщение
+        const message = `🆕 НОВАЯ ЗАЯВКА NeuroSite Express
+
+👤 Имя: ${formData.name}
+📞 Телефон: ${formData.phone}
+📧 Email: ${formData.email}
+💰 Тариф: ${getTariffName(formData.tariff)}
+📅 Желаемая дата: ${formData.date || 'Не указана'}
+💬 Сообщение: ${formData.message || 'Не указано'}
+
+⏰ Дата заявки: ${new Date().toLocaleString('ru-RU')}`;
+
+        // Пробуем несколько способов отправки
+        let response;
+        
+        // Способ 1: Прямой запрос (работает на продакшене)
+        try {
+            const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
+            response = await fetch(telegramUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CONFIG.chatId,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            });
+            
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Прямой запрос успешен:', result);
+                return result.ok;
+            }
+        } catch (directError) {
+            console.log('Прямой запрос не сработал, пробуем proxy...');
+        }
+        
+        // Способ 2: Через корс прокси
+        const proxyUrl = 'https://api.allorigins.win/raw?url=';
+        const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
+        
+        response = await fetch(proxyUrl + encodeURIComponent(telegramUrl), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CONFIG.chatId,
+                text: message,
+                parse_mode: 'HTML'
+            })
         });
 
         if (!response.ok) {
-            const errorData = await response.text();
-            console.error('Netlify Functions error:', errorData);
-            throw new Error(`HTTP ${response.status}: ${errorData}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const result = await response.json();
-        return result.success;
+        console.log('Telegram response:', result);
+        return result.ok;
 
     } catch (error) {
         console.error('Ошибка отправки в Telegram:', error);
+        
+        // Пробуем альтернативный proxy
+        try {
+            const altProxyUrl = 'https://cors-anywhere.herokuapp.com/';
+            const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
+            
+            const altResponse = await fetch(altProxyUrl + telegramUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CONFIG.chatId,
+                    text: `🆕 НОВАЯ ЗАЯВКА NeuroSite Express
+
+👤 Имя: ${formData.name}
+📞 Телефон: ${formData.phone}
+📧 Email: ${formData.email}
+💰 Тариф: ${getTariffName(formData.tariff)}
+📅 Желаемая дата: ${formData.date || 'Не указана'}
+💬 Сообщение: ${formData.message || 'Не указано'}
+
+⏰ Дата заявки: ${new Date().toLocaleString('ru-RU')}`,
+                    parse_mode: 'HTML'
+                })
+            });
+            
+            if (altResponse.ok) {
+                const altResult = await altResponse.json();
+                return altResult.ok;
+            }
+        } catch (altError) {
+            console.error('Альтернативный proxy тоже не сработал:', altError);
+        }
+        
         return false;
     }
 }
@@ -340,7 +428,7 @@ if (bookingForm) {
             
             if (success) {
                 // Показываем успешное сообщение
-                alert('Спасибо за заявку! Мы получили ваши данные и свяжемся с вами в течение 15 минут.');
+                alert('✅ Спасибо за заявку! Мы получили ваши данные и свяжемся с вами в течение 15 минут.');
                 
                 // Очищаем форму
                 bookingForm.reset();
@@ -348,7 +436,8 @@ if (bookingForm) {
                 // Закрываем модалку
                 closeModal();
             } else {
-                throw new Error('Не удалось отправить заявку');
+                // Показываем сообщение с альтернативным способом связи
+                alert('⚠️ Произошла техническая ошибка при отправке заявки.\n\nПожалуйста, напишите нам напрямую в Telegram: @bogdan_neuroimpulse\n\nИли отправьте заявку на email: info@neurosite.ru');
             }
         } catch (error) {
             console.error('Ошибка при отправке формы:', error);

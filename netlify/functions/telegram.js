@@ -1,4 +1,5 @@
-const fetch = require('node-fetch');
+// Используем встроенный fetch в новых версиях Node.js
+const fetch = globalThis.fetch || require('node-fetch');
 
 exports.handler = async (event, context) => {
   // Разрешаем только POST запросы
@@ -27,6 +28,19 @@ exports.handler = async (event, context) => {
   }
 
   try {
+    // Проверяем наличие переменных окружения
+    if (!process.env.TELEGRAM_BOT_TOKEN || !process.env.TELEGRAM_CHAT_ID) {
+      console.error('Missing environment variables:', {
+        hasToken: !!process.env.TELEGRAM_BOT_TOKEN,
+        hasChatId: !!process.env.TELEGRAM_CHAT_ID
+      });
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: 'Переменные окружения не настроены' })
+      };
+    }
+
     // Парсим данные из формы
     const { name, phone, email, tariff, date, message } = JSON.parse(event.body);
 
